@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<title>Example 3 - MapMarkerJS</title>
+		
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script src="js/libs/jquery-1.7.1.min.js"></script>
+		<script src="js/libs/raphael.js"></script>
+		<script src="js/libs/g.raphael.js"></script>
+		<script src="js/libs/g.pie.js"></script>
+
+		<script src="js/Arc.js"></script>
+		<script src="js/PieChart.js"></script>
+		<script src="js/MapMarker.js"></script>
+		
+		<script type="text/javascript">
+
+			//all pies to display
+			var pies = { items:[	
+				{ id:"pie1", lat: 55.652798, lng: 12.55570964, data: [ 55, 20, 13, 32, 5 ] },
+				{ id:"pie2", lat: 57.00485, lng: 9.951949, data: [ 15, 20, 33 ] },
+				{ id:"pie3", lat: 55.491304, lng: 9.46855160, data: [ 25, 30, 13, 32, 5 ] }
+			]};
+
+			function initialize() {
+
+	  			//set up map
+				var myLatLng = new google.maps.LatLng( 55.652798, 11.55570964);
+				var mapOptions = {
+				    zoom: 7,
+				    center: myLatLng,
+				    mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+
+				var map = new google.maps.Map( document.getElementById("map"), mapOptions );
+				
+				//loop through all photos 
+			  	var len = pies.items.length;
+			  	for( var i = 0; i < len; i++ ) {
+			  	  	console.log("create pies");
+			  	  	var item = pies.items[ i ];
+				  	
+				  	//create marker
+				  	var pie = createPie( item.id, item.data );
+					
+					//option for marker
+					var mapMarkerOption = {
+						element:pie, 
+						position:new google.maps.LatLng( item.lat, item.lng ), 
+						anchor: new google.maps.Point( 50, 50 ),
+						map:map
+					};
+
+				  	var marker = new MapMarker( mapMarkerOption );
+			  	}
+			}
+
+			function createPie( id, data ){
+
+				var $div = $("<div id='" + id + "'></div>");
+				$("body").append( $div );
+				var piechart = new PieChart( id, 75, 75, 50, data );
+
+				return $div[0];
+			}
+
+
+		</script>
+
+		<style>
+
+			#map{
+				width:900px;
+				height:800px;
+			}
+
+		</style>
+
+	</head>
+	<body onload="initialize()">
+	  <p>Piechart example</p>
+	  <div id="map"></div>
+	</body>
+</html>

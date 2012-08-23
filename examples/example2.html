@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<title>Example 2 - MapMarkerJS</title>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script src="js/libs/jquery-1.7.1.min.js"></script>
+		<script src="js/MapMarker.js"></script>
+		
+		<script type="text/javascript">
+
+			//main function
+			function initialize() {
+				
+ 				//set up map
+				var myLatLng = new google.maps.LatLng( 52.516208,13.376829 );
+				var mapOptions = {
+				    zoom: 18,
+				    center: myLatLng,
+				    mapTypeId: google.maps.MapTypeId.SATELLITE
+				};
+
+				var map = new google.maps.Map( document.getElementById("map"), mapOptions );
+				
+				//create html markup
+				var div = document.createElement('div');
+				var iframe = $('<iframe width="200" height="150" src="http://www.youtube.com/embed/WjWDrTXMgF8" frameborder="0" allowfullscreen></iframe>');
+				
+				//add embed video to div
+				var $div = $(div).append( $(iframe) );
+				//add class for styling
+				$div.addClass( "video" );
+				
+				//create marker
+				var mapMarkerOption = {
+					element:div, 
+					anchor:new google.maps.Point( 100, 75 ),
+					position:myLatLng, 
+					map:map
+				};
+
+			  	var marker = new MapMarker( mapMarkerOption );
+			}
+
+		</script>
+
+		<style>
+			
+			body {
+			  background-color: white;
+			  margin: 0;
+			  padding: 0;
+			  position: absolute;
+			}
+			
+			#map {
+			  width: 798px;
+			  height: 678px;
+			  position: absolute;
+			  background-color: white;
+			  border: 1px solid black;
+			}
+
+			.video{
+				border:2px solid white;
+			}
+		</style>
+
+	</head>
+	<body onload="initialize()">
+	  <div id="map"></div>
+	</body>
+</html>

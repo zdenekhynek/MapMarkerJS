@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<title>Example 1 - MapMarkerJS</title>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script src="js/libs/jquery-1.7.1.min.js"></script>
+		<script src="js/MapMarker.js"></script>
+		
+		<script type="text/javascript">
+
+			//all photos to display
+			var photos = { items:[	
+				{ src:"imgs/1.jpg", title:"Title 1", lat: 64.117797, lng:-21.813771 },
+				{ src:"imgs/2.jpg", title:"Title 2", lat: 64.217797, lng:-21.613771 },
+				{ src:"imgs/3.jpg", title:"Title 3", lat: 64.917797, lng:-21.313771 },
+				{ src:"imgs/4.jpg", title:"Title 4", lat: 64.717797, lng:-21.413771 },
+				{ src:"imgs/5.jpg", title:"Title 5", lat: 64.817797, lng:-21.613771 },
+				{ src:"imgs/6.jpg", title:"Title 6", lat: 64.517797, lng:-21.413771 },
+				{ src:"imgs/7.jpg", title:"Title 7", lat: 64.417797, lng:-21.213771 },
+				{ src:"imgs/8.jpg", title:"Title 8", lat: 64.317797, lng:-21.113771 }
+			]};
+			
+			//main function
+			function initialize() {
+			  
+			  //set up map
+			  var myLatLng = new google.maps.LatLng( 64.117797,-21.813771 );
+			  var mapOptions = {
+			    zoom: 9,
+			    center: myLatLng,
+			    mapTypeId: google.maps.MapTypeId.SATELLITE
+			  };
+
+			  var map = new google.maps.Map( document.getElementById("map"), mapOptions );
+			 
+			  //loop through all photos 
+			  var len = photos.items.length;
+			  for( var i = 0; i < len; i++ ) {
+			  	
+			  	var item = photos.items[ i ];
+			  	//create markers
+			  	var marker = addPhotoMarker( item, map );
+
+			  	//fadeOut photos by default, accesign marker's element property which is html content of the marker
+			  	$( marker.element ).css("opacity",.5);
+
+			  	//bind events
+			  	$( marker.element ).on("mouseover", function(){
+			  		console.log("mouseover");
+			  		$(this).animate({
+				    	opacity: 1
+			  		});
+			  	});
+
+			  	$(  marker.element ).on("mouseout", function(){
+			  		console.log("mouseout");
+			  		$(this).animate({
+				    	opacity: .5
+			  		});
+			 	 });
+
+			  } //end of loop
+
+			}
+
+			function addPhotoMarker( item, map ){
+
+				//get html markup 
+				var element = createPhotoElement( item.src );
+				  	
+			  	//option for marker
+			  	var mapMarkerOption = {
+			  		element:element, 
+			  		position:new google.maps.LatLng( item.lat, item.lng ), 
+			  		map:map,
+			  		anchor:new google.maps.Point( 50, 50)
+			  	};
+
+			  	//create new marker, automatically put on map
+			  	var photoMarker = new MapMarker( mapMarkerOption );
+
+			  	return photoMarker;
+			}
+
+			function createPhotoElement( src ){
+				
+				//create img element
+				var div = document.createElement('div');
+				var img = $("<img src='" + src + "' />");
+				 
+				$(div).addClass( "photo" );  
+				div.appendChild( img.get(0) );
+				
+				return div;
+			}
+
+		</script>
+
+		<style>
+			
+			body {
+			  background-color: white;
+			  margin: 0;
+			  padding: 0;
+			  position: absolute;
+			}
+			
+			#map {
+			  width: 798px;
+			  height: 678px;
+			  position: absolute;
+			  background-color: white;
+			  border: 1px solid black;
+			}
+
+			#animate {
+			  position: absolute;
+			  top:300px;
+			  left:10px;
+			}
+
+			.photo{
+				border:2px solid white;
+			}
+		</style>
+
+	</head>
+	<body onload="initialize()">
+	  <div id="map"></div>
+	</body>
+</html>
