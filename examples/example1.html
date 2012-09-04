@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,14 +11,14 @@
 
 			//all photos to display
 			var photos = { items:[	
-				{ src:"imgs/1.jpg", title:"Title 1", lat: 64.117797, lng:-21.813771 },
-				{ src:"imgs/2.jpg", title:"Title 2", lat: 64.217797, lng:-21.613771 },
-				{ src:"imgs/3.jpg", title:"Title 3", lat: 64.917797, lng:-21.313771 },
-				{ src:"imgs/4.jpg", title:"Title 4", lat: 64.717797, lng:-21.413771 },
-				{ src:"imgs/5.jpg", title:"Title 5", lat: 64.817797, lng:-21.613771 },
-				{ src:"imgs/6.jpg", title:"Title 6", lat: 64.517797, lng:-21.413771 },
-				{ src:"imgs/7.jpg", title:"Title 7", lat: 64.417797, lng:-21.213771 },
-				{ src:"imgs/8.jpg", title:"Title 8", lat: 64.317797, lng:-21.113771 }
+				{ src:"imgs/1.jpg", title:"Title 1", lat: 64.117797, lng:-21.813771, width:"100px", height:"67px" },
+				{ src:"imgs/2.jpg", title:"Title 2", lat: 64.217797, lng:-21.613771, width:"100px", height:"67px" },
+				{ src:"imgs/3.jpg", title:"Title 3", lat: 64.917797, lng:-21.313771, width:"100px", height:"67px" },
+				{ src:"imgs/4.jpg", title:"Title 4", lat: 64.717797, lng:-21.413771, width:"100px", height:"67px" },
+				{ src:"imgs/5.jpg", title:"Title 5", lat: 64.817797, lng:-21.613771, width:"100px", height:"67px" },
+				{ src:"imgs/6.jpg", title:"Title 6", lat: 64.517797, lng:-21.413771, width:"100px", height:"67px" },
+				{ src:"imgs/7.jpg", title:"Title 7", lat: 64.417797, lng:-21.213771, width:"100px", height:"67px" },
+				{ src:"imgs/8.jpg", title:"Title 8", lat: 64.317797, lng:-21.113771, width:"100px", height:"67px" }
 			]};
 			
 			//main function
@@ -48,27 +47,20 @@
 
 			  	//bind events
 			  	$( marker.element ).on("mouseover", function(){
-			  		console.log("mouseover");
-			  		$(this).animate({
-				    	opacity: 1
-			  		});
+			  		$( this ).css( "opacity", 1 );
 			  	});
 
-			  	$(  marker.element ).on("mouseout", function(){
-			  		console.log("mouseout");
-			  		$(this).animate({
-				    	opacity: .5
-			  		});
-			 	 });
+			  	$( marker.element ).on("mouseout", function(){
+			  		$( this ).css( "opacity", .5 );
+				 });
 
 			  } //end of loop
-
 			}
 
 			function addPhotoMarker( item, map ){
 
 				//get html markup 
-				var element = createPhotoElement( item.src );
+				var element = createPhotoElement( item.src, item.width, item.height );
 				  	
 			  	//option for marker
 			  	var mapMarkerOption = {
@@ -84,16 +76,21 @@
 			  	return photoMarker;
 			}
 
-			function createPhotoElement( src ){
+			function createPhotoElement( src, width, height ){
 				
 				//create img element
-				var div = document.createElement('div');
+				var $div = $("<div></div>");//document.createElement('div');
 				var img = $("<img src='" + src + "' />");
 				 
-				$(div).addClass( "photo" );  
-				div.appendChild( img.get(0) );
+				$div.addClass( "photo" ); 
+				$div.css( {	"width" : width,
+							"height": height
+					} ); 
+				$div.append( img.get(0) );
+
+				console.log( $div.css("width") );
 				
-				return div;
+				return $div.get(0);
 			}
 
 		</script>
@@ -108,8 +105,8 @@
 			}
 			
 			#map {
-			  width: 798px;
-			  height: 678px;
+			  width: 500px;
+			  height: 340px;
 			  position: absolute;
 			  background-color: white;
 			  border: 1px solid black;

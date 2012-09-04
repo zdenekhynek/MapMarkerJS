@@ -1,7 +1,7 @@
 function PieChart( canvasId, cx, cy, radius, data) {
 
 	var r = Raphael( canvasId );
-	pie = r.piechart( cx, cy, radius, data );
+    pie = r.piechart( cx, cy, radius, data );
 
     pie.hover(function () {
         this.sector.stop();

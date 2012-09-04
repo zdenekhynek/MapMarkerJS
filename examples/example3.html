@@ -19,9 +19,9 @@
 
 			//all pies to display
 			var pies = { items:[	
-				{ id:"pie1", lat: 55.652798, lng: 12.55570964, data: [ 55, 20, 13, 32, 5 ] },
+				{ id:"pie1", lat: 55.652798, lng: 12.55570964, data: [ 55, 20,  32 ] },
 				{ id:"pie2", lat: 57.00485, lng: 9.951949, data: [ 15, 20, 33 ] },
-				{ id:"pie3", lat: 55.491304, lng: 9.46855160, data: [ 25, 30, 13, 32, 5 ] }
+				{ id:"pie3", lat: 55.491304, lng: 9.46855160, data: [ 25,  13, 32, 5 ] }
 			]};
 
 			function initialize() {
@@ -39,7 +39,6 @@
 				//loop through all photos 
 			  	var len = pies.items.length;
 			  	for( var i = 0; i < len; i++ ) {
-			  	  	console.log("create pies");
 			  	  	var item = pies.items[ i ];
 				  	
 				  	//create marker
@@ -61,6 +60,10 @@
 
 				var $div = $("<div id='" + id + "'></div>");
 				$("body").append( $div );
+				$div.css( {
+					"width":"150px",
+					"height":"150px"
+				});
 				var piechart = new PieChart( id, 75, 75, 50, data );
 
 				return $div[0];
@@ -71,16 +74,20 @@
 
 		<style>
 
+			body,html {
+				margin:0;
+				padding:0;
+			}
+
 			#map{
-				width:900px;
-				height:800px;
+				width: 800px;
+			  	height: 540px;
 			}
 
 		</style>
 
 	</head>
 	<body onload="initialize()">
-	  <p>Piechart example</p>
 	  <div id="map"></div>
 	</body>
 </html>

@@ -31,6 +31,8 @@
 				var $div = $(div).append( $(iframe) );
 				//add class for styling
 				$div.addClass( "video" );
+				$div.css( { "width" : "200px",
+							"height" : "150px" })
 				
 				//create marker
 				var mapMarkerOption = {
@@ -55,8 +57,8 @@
 			}
 			
 			#map {
-			  width: 798px;
-			  height: 678px;
+			  width: 500px;
+			  height: 340px;
 			  position: absolute;
 			  background-color: white;
 			  border: 1px solid black;
