@@ -1,20 +1,30 @@
 MapMakerJS
 ==========
 
-Create rich interactive Google Maps markers.
+Even with Symbols introduced recently, I didn't find a way in Google Maps Api V3 to have creative freedom while working with Markers. It was the one feature I missed most from the Flash version of the API.
 
-The MapMarkerJS library enables you to create Google Maps Markers from any HTML content ( including videos, iframes, vector graphics, flash files etc. ). Furthemore the HMTL withing marker is  is still fully accessible so you can create truly animated and fully interactive markers.
+So I wrote a little MapMarker class, which enables you to create Google Maps Markers from any HTML content ( including videos, iframes, vector graphics, flash files etc. ). Furthemore the HMTL within marker is is still fully accessible so you can create truly animated and fully interactive markers. The class takes advantage of the google.maps.OverlayView.
 
-Even with Symbols introduced recently, I didn't find a way in Google Maps Api V3 to have creative freedom while working with Markers. The Flash version of API, now deprecated, allows for creating custom marker class, which enables you have fully interactive marker graphics, with animations, videos etc. In the latest V3 version of API, you cannot do that, or at least I didn't find a way as easy as in Flash.
+<strong>Example 1 - img element with fadeIns and fadeOuts</strong>
 
-So I write this little MapMarkerJS class, which takes advantage of the google.maps.OverlayView. This class enables you to put arbitrary overlay at specific location. The library does nothing else than appends supplied HTML content to of the panes. 
+<iframe src="http://blog.zdenekhynek.cz/examples/mapmarkerjs/example1.html" width="505" height="342"></iframe>
 
-The idea came to when I was trying to replicate this flash project (http://www.geographics.cz/velov/) using gRapheal and Google Maps.
+<a title="Example 1" href="http://blog.zdenekhynek.cz/examples/mapmarkerjs/example1.html" target="_blank">View example</a> <a title="Sources example 1" href="http://blog.zdenekhynek.cz/examples/mapmarkerjs/example1.zip">Download sources</a>
 
-This is heavily "work in progress" and there might be some issues with performance, or certain dom elements.
+<strong>Example 2 -  iframes with embedded youtube videos</strong>
 
-The first example shows img elements, which have fadeIn and fadeOut base on mouse position.
+<iframe src="http://blog.zdenekhynek.cz/examples/mapmarkerjs/example2.html" width="505" height="342"></iframe>
 
-The second example shows iframes with embedded youtube videos.
+<a title="Example 2" href="http://blog.zdenekhynek.cz/examples/mapmarkerjs/example2.html" target="_blank">View example</a> <a title="Sources example 2" href="http://blog.zdenekhynek.cz/examples/mapmarkerjs/example2.zip">Download sources</a>
 
-The third example shows gRaphael piecharts.
+<strong>Example 2 -  gRaphael piecharts</strong>
+
+<iframe src="http://blog.zdenekhynek.cz/examples/mapmarkerjs/example3.html" width="505" height="342"></iframe>
+
+<a title="Example 3" href="http://blog.zdenekhynek.cz/examples/mapmarkerjs/example3.html" target="_blank">View example</a> <a title="Sources example 3" href="http://blog.zdenekhynek.cz/examples/mapmarkerjs/example3.zip">Download sources</a>
+
+The idea for the library came to me when I was trying to replicate this flash project (<a href="http://www.geographics.cz/velov/">http://www.geographics.cz/velov/</a>) using gRapheal and Google Maps. It's heavily "work in progress" and there might be some issues with performance, or certain dom elements.
+
+The library is available on <a title="MapMarkerJS" href="https://github.com/zdenekhynek/MapMarkerJS" target="_blank">Github</a> as well.
+
+&nbsp;
